@@ -10,37 +10,37 @@ window.addEventListener('DOMContentLoaded', function() {
     showSlides(slideIndex);
 
     function showSlides(n) {
-        if (n > slides.length) {
+        if (n > slides.length) {    //проверка если закончились слайды то переключаемся на 1й
             slideIndex = 1;
         }
-        if (n < 1) {
+        if (n < 1) {                     // проверка в обратную сторону, переключаемся на последний
             slideIndex = slides.length;
         }
         
-        slides.forEach((item) => item.style.display = 'none');
-        dots.forEach((item) => item.classList.remove('dot-active'));
+        slides.forEach((item) => item.style.display = 'none');    //скрываем все картинки
+        dots.forEach((item) => item.classList.remove('dot-active'));    //убираем класс активности с точек
 
-        slides[slideIndex - 1].style.display = "block";
-        dots[slideIndex - 1].classList.add('dot-active');
+        slides[slideIndex - 1].style.display = "block";         //показываем 1ю картинку
+        dots[slideIndex - 1].classList.add('dot-active');       //задаем класс активности соответсвующей первой картинке точке
     }
 
     function plusSlide(n) {
         showSlides(slideIndex += n);
     }
 
+    prev.addEventListener('click', function() {        //листаем слайды назад по клику на prev
+        plusSlide(-1);
+    });
+    
+    next.addEventListener('click', function() {       //листаем слайды вперед по клику на next
+        plusSlide(1);
+    });
+
     function currentSlide (n) {
         showSlides(slideIndex = n);
     }
 
-    prev.addEventListener('click', function() {
-        plusSlide(-1);
-    });
-    
-    next.addEventListener('click', function() {
-        plusSlide(1);
-    });
-
-    dotsWrap.addEventListener('click', function(event) {
+    dotsWrap.addEventListener('click', function(event) {      //переключаем слайды по клику по точкам
         for (let i = 0; i < dots.length; i++) {
             if (event.target.classList.contains('dot') && event.target == dots[i]) {
                 currentSlide(i + 1);
