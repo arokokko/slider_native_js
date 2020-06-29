@@ -5,23 +5,23 @@ window.addEventListener('DOMContentLoaded', function() {
         next = document.querySelector('.next'),
         dotsWrap = document.querySelector('.slider-dots'),
         dots = document.querySelectorAll('.dot'),
-        slideIndex = 1;
+        slideIndex = 0;
 
     showSlides(slideIndex);
 
     function showSlides(n) {
-        if (n > slides.length) {    //проверка если закончились слайды то переключаемся на 1й
-            slideIndex = 1;
+        if (n > slides.length - 1) {    //проверка если закончились слайды то переключаемся на 1й
+            slideIndex = 0;
         }
-        if (n < 1) {                     // проверка в обратную сторону, переключаемся на последний
-            slideIndex = slides.length;
+        if (n < 0) {                     // проверка в обратную сторону, переключаемся на последний
+            slideIndex = slides.length - 1;
         }
         
         slides.forEach((item) => item.style.display = 'none');    //скрываем все картинки
         dots.forEach((item) => item.classList.remove('dot-active'));    //убираем класс активности с точек
 
-        slides[slideIndex - 1].style.display = "block";         //показываем 1ю картинку
-        dots[slideIndex - 1].classList.add('dot-active');       //задаем класс активности соответсвующей первой картинке точке
+        slides[slideIndex ].style.display = "block";         //показываем 1ю картинку
+        dots[slideIndex ].classList.add('dot-active');       //задаем класс активности соответсвующей первой картинке точке
     }
 
     function plusSlide(n) {
@@ -43,7 +43,7 @@ window.addEventListener('DOMContentLoaded', function() {
     dotsWrap.addEventListener('click', function(event) {      //переключаем слайды по клику по точкам
         for (let i = 0; i < dots.length; i++) {
             if (event.target.classList.contains('dot') && event.target == dots[i]) {
-                currentSlide(i + 1);
+                currentSlide(i );
             }
         }
     });
